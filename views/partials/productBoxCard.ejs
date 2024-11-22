@@ -1,0 +1,35 @@
+<!-- productBox.ejs -->
+<link rel="stylesheet" href="/css/productBoxCard.css">
+
+<% products.forEach((product)=> { %>
+<div class="product-box-card" data-product-id="<%= product.product_id %>">
+  
+    <a href="#"><img src="<%= product.product_images %>" alt="<%= product.product_images %>" width="250px" height="200px"></a>
+    <div class="product-tile-container">
+      <div class="product-tile-info-text">
+        <div class="product-tile-title">
+          <%= product.product_name %>
+        </div>
+      </div>
+      <!-- gap -->
+      <div class="product-tile-price">
+        <% if (product.product_price_promotion) { %>
+          <div class="discount-version">
+              <div class="discounted-price">
+                  $<%= product.product_price_promotion %>
+              </div>
+              <div class="original-price">
+                  $<%= product.product_price %>
+              </div>
+          </div>
+          
+        <% } else { %>
+            <div class="product-price">
+                $<%= product.product_price %>
+            </div>
+        <% } %>
+      </div>
+    </div>
+    
+</div>
+<% }); %>

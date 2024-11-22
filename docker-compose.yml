@@ -1,0 +1,27 @@
+networks:
+  bunnybuby-network:
+services:
+  frontend:
+    restart: unless-stopped
+    image: kiehlz/bb-frontend:latest
+    ports:
+      - "80:8010"
+    networks:
+      - bunnybuby-network
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+  db:
+    image: mysql:8.0
+    restart: unless-stopped 
+    networks:
+      - bunnybuby-network     
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
